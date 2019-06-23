@@ -1,10 +1,37 @@
 package com.homework.maksym;
 
-public abstract class Car {
+public class Car {
+    protected String name;
+    protected String year;
+    protected String country;
+    protected double price;
+    protected double engine;
 
-    public abstract double getPrice(int carId);
+    public Car(String name, String year, String country, double price, double engine) {
+        this.name = name;
+        this.year = year;
+        this.country = country;
+        this.price = price;
+        this.engine = engine;
+    }
 
-    public abstract String getYear(int carId);
+    public String getName() {
+        return name;
+    }
 
-    public abstract double getEngine(int carId);
+    public String getYear() {
+        return year;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getEngine() {
+        return engine;
+    }
 }

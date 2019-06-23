@@ -1,10 +1,13 @@
 package com.homework.maksym.main;
 
+import com.homework.maksym.Car;
+import com.homework.maksym.DBO.CarDBO;
 import com.homework.maksym.DBO.QueryBuider;
 import com.homework.maksym.DBO.QueryDBO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 /**
  * CREATE TABLE `cars` (
@@ -23,19 +26,10 @@ import java.sql.SQLException;
  */
 public class Main {
     public static void main(String[] args) throws SQLException {
-        QueryDBO q = new QueryBuider();
-        q.select("id, name, price");
-        q.setLimit(1);
-        q.from("cars");
-        q.where("id", 1);
-        ResultSet rs = q.getRes();
+        Map <Integer, Car> cars = CarDBO.getAllCars();
+        for(Map.Entry<Integer, Car> item : cars.entrySet()){
 
-        while (rs.next()) {
-            int id = rs.getInt(1);
-            String name = rs.getString(2);
-            String price = rs.getString(3);
-            System.out.printf("id: %d, name: %s, author: %s %n", id, name, price);
+            System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue().getName());
         }
-        q.closeRs(rs);
     }
 }

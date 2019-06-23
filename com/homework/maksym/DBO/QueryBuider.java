@@ -45,6 +45,9 @@ public class QueryBuider <T> implements QueryDBO<T>{
         this.from = from;
     }
 
+    //TODO
+    //  add  <, =, > to clause
+    //
     public void where(String whereN, T val){
         String value = val.toString();
         if(where.toString().length()>0){
