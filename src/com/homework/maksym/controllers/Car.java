@@ -1,11 +1,11 @@
-package com.homework.maksym;
+package com.homework.maksym.controllers;
 
 public class Car {
     protected int id;
     protected String name;
     protected String year;
     protected String country;
-    protected double price;
+    protected Double price;
     protected double engine;
 
     public Car(int id, String name, double price) {

@@ -1,13 +1,13 @@
 package com.homework.maksym.DBO;
 
-import com.homework.maksym.Car;
+import com.homework.maksym.controllers.Car;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CarDBO{
+public final class CarDBO{
 
 
     public CarDBO(){
