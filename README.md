@@ -2,7 +2,7 @@
 Hello, this is a place for feature readme data
 
 #### SQL tables ###
-[
+<code>
         CREATE TABLE `cars` (
     	`id` INT(11) NOT NULL AUTO_INCREMENT,
     	`car_id` INT(11) NOT NULL DEFAULT '0',
@@ -26,4 +26,4 @@ Hello, this is a place for feature readme data
     ENGINE=InnoDB
     AUTO_INCREMENT=11
     ;
-]
+</code>
