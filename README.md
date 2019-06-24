@@ -2,11 +2,11 @@
 Hello, this is a place for feature readme data
 
 #### SQL tables ###
-<code>
+
 CREATE TABLE `cars` (
-        `id` INT(11) NOT NULL AUTO_INCREMENT,\n
-        `car_id` INT(11) NOT NULL DEFAULT '0',\n
-        `name` VARCHAR(50) NULL DEFAULT NULL,\n
+        `id` INT(11) NOT NULL AUTO_INCREMENT,
+        `car_id` INT(11) NOT NULL DEFAULT '0',
+        `name` VARCHAR(50) NULL DEFAULT NULL,
         `country` INT(11) NULL DEFAULT NULL,
         `price` DECIMAL(10,2) NULL DEFAULT NULL,
     	`engine` INT(11) NOT NULL DEFAULT '1',
@@ -24,6 +24,4 @@ CREATE TABLE `cars` (
     )
     COLLATE='utf8_general_ci'
     ENGINE=InnoDB
-    AUTO_INCREMENT=11
-    ;
-</code>
+    AUTO_INCREMENT=0;
