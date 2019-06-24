@@ -1,15 +1,18 @@
 package com.homework.maksym.DBO;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class QueryBuider <T> implements QueryDBO<T>{
     private static final String db = "jdbc:mariadb://localhost:3336/java";
-    private static final String user = "root";
-    private static final String password = "Ghbdtngh1";
+    private String user;
+    private String password;
 
     private static Connection con;
     private static Statement stmt;
@@ -22,6 +25,25 @@ public class QueryBuider <T> implements QueryDBO<T>{
     private int offset = 0;
 
     public QueryBuider(){
+        try (InputStream input = QueryBuider.class.getClassLoader().getResourceAsStream("DBO.properties")) {
+
+            Properties prop = new Properties();
+
+            if (input == null) {
+                System.out.println("Sorry, unable to find config.properties");
+                return;
+            }
+
+            //load a properties file from class path, inside static method
+            prop.load(input);
+
+            //get the property value and print it out
+            this.user = prop.getProperty("db.user");
+            this.password = prop.getProperty("db.password");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public ResultSet getRes(){
@@ -87,6 +109,7 @@ public class QueryBuider <T> implements QueryDBO<T>{
 
         String query = query();
         System.out.println(query);
+
         try {
             // opening database connection to MySQL server
             con = DriverManager.getConnection(db, user, password);
@@ -120,21 +143,5 @@ public class QueryBuider <T> implements QueryDBO<T>{
     }
 
 
-    /*public static void main(String[] args) throws SQLException, ClassNotFoundException{
-        QueryDBO q = new QueryBuider();
-        q.select("id, name, price");
-        q.setLimit(1);
-        q.from("cars");
-        q.where("id", 1);
-        ResultSet rs = q.getRes();
 
-        while (rs.next()) {
-            int id = rs.getInt(1);
-            String name = rs.getString(2);
-            String price = rs.getString(3);
-            System.out.printf("id: %d, name: %s, author: %s %n", id, name, price);
-        }
-        q.closeRs(rs);
-
-    }*/
 }
