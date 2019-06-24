@@ -32,7 +32,7 @@ public class YearDBO {
     public static Year getSingleYear (Integer id) throws SQLException{
         QueryDBO q = new QueryBuider();
         q.select("*");
-        q.from("newCar");
+        q.from("years");
         q.where("id", id);
         ResultSet rs = q.getRes();
 
@@ -47,8 +47,9 @@ public class YearDBO {
             rs.first();
         int id = rs.getInt(1);
         String year = rs.getString(2);
+        double vat = rs.getDouble(3);
 
-        Year yearObj = new Year(id, year);
+        Year yearObj = new Year(id, year, vat);
         return yearObj;
     }
 }

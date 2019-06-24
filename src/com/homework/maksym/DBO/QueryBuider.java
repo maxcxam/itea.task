@@ -7,9 +7,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
-public class QueryBuider <T> implements QueryDBO<T>{
+public class QueryBuider <T> implements QueryDBO<T>, InsertDBO<Integer, T>{
     private static final String db = "jdbc:mariadb://localhost:3336/java";
     private String user;
     private String password;
@@ -108,7 +110,6 @@ public class QueryBuider <T> implements QueryDBO<T>{
     private void result(){
 
         String query = query();
-        System.out.println(query);
 
         try {
             // opening database connection to MySQL server
@@ -140,6 +141,44 @@ public class QueryBuider <T> implements QueryDBO<T>{
 
     public void closeRs(ResultSet r){
         try { r.close(); } catch(SQLException se) { /*can't do anything */ }
+    }
+
+    public void insert(String table, Map<Integer, T> obj){
+        Object o = obj.get(1);
+        if(o==null)
+            throw new NullPointerException("Null is not insertable object");
+        StringBuilder query = new StringBuilder("INSERT INTO ");
+        query.append(table);
+        query.append(" VALUES(NULL,");
+
+        for(Map.Entry<Integer, T> item : obj.entrySet()){
+            query.append("\"");
+            query.append(item.getValue());
+            query.append("\",");
+        }
+        StringBuilder q = new StringBuilder(query.toString().substring(0, query.toString().length()-1));
+        q.append(")");
+        try {
+            // opening database connection to MySQL server
+            con = DriverManager.getConnection(db, user, password);
+
+            // getting Statement object to execute query
+            stmt = con.createStatement();
+
+            // executing SELECT query
+            rs = stmt.executeQuery(q.toString());
+
+
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        } finally {
+            //close connection ,stmt and resultset here
+            try { con.close(); } catch(SQLException se) { /*can't do anything */ }
+            try { stmt.close(); } catch(SQLException se) { /*can't do anything */ }
+            try { rs.close(); } catch(SQLException se) { /*can't do anything */ }
+        }
+
+
     }
 
 
