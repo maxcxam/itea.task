@@ -4,10 +4,11 @@ import com.homework.maksym.Car;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CarDBO {
+public class CarDBO{
 
 
     public CarDBO(){
@@ -23,14 +24,34 @@ public class CarDBO {
 
         while (rs.next()) {
             int id = rs.getInt(1);
+            cars.put(id, carObject(rs));
+        }
+        q.closeRs(rs);
+        return cars;
+    }
+
+    public static Car getSingleCar (Integer id) throws SQLException{
+        QueryDBO q = new QueryBuider();
+        q.select("*");
+        q.from("cars");
+        q.where("id", id);
+        ResultSet rs = q.getRes();
+
+        Car car = carObject(rs);
+        q.closeRs(rs);
+        return car;
+    }
+
+    protected static Car carObject (ResultSet rs) throws SQLException{
+            if(rs.getRow()==0)
+                rs.first();
+            int id = rs.getInt(1);
             String name = rs.getString(2); //name
             String country = rs.getString(3); //country
             double price = rs.getDouble(4);
             double engine = rs.getDouble(5);
             String year = rs.getString(6);
-            cars.put(id, new Car(name, year, country, price, engine));
-        }
-        q.closeRs(rs);
-        return cars;
+            Car car = new Car(id, name, year, country, price, engine);
+        return car;
     }
 }

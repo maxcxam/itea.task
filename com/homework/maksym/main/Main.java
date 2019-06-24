@@ -2,10 +2,6 @@ package com.homework.maksym.main;
 
 import com.homework.maksym.Car;
 import com.homework.maksym.DBO.CarDBO;
-import com.homework.maksym.DBO.QueryBuider;
-import com.homework.maksym.DBO.QueryDBO;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -31,5 +27,6 @@ public class Main {
 
             System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue().getName());
         }
+        System.out.println(CarDBO.getSingleCar(2).getName());
     }
 }
