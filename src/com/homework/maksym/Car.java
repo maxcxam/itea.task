@@ -8,17 +8,26 @@ public class Car {
     protected double price;
     protected double engine;
 
-    public Car(int id, String name, String year, String country, double price, double engine) {
+    public Car(int id, String name, double price) {
         this.name = name;
-        this.year = year;
-        this.country = country;
         this.price = price;
-        this.engine = engine;
         this.id = id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setEngine(double engine) {
+        this.engine = engine;
     }
 
     public String getYear() {
