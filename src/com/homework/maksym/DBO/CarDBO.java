@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class CarDBO{
+public class CarDBO{
 
 
     public CarDBO(){
